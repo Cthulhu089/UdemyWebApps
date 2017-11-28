@@ -1,28 +1,31 @@
-package com.udemy.jpa;
+package com.udemy.inheritance;
 
-import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="STUDENT")
-public class Student {
+@Inheritance( strategy = InheritanceType.SINGLE_TABLE )
+@Table (name = "VEHICLE")
+@DiscriminatorColumn (name = "type")
+public class Vehicle {
 	@Id
-	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@Column(name = "name")
-	private String name;
-	
-	@Column(name = "age")
-	private int age;
+	protected String name;
 
-	public Student() {
-		
+	public Vehicle() {
+
+	}
+
+	public Vehicle(String name) {
+		this.name = name;
 	}
 
 	public int getId() {
@@ -40,15 +43,8 @@ public class Student {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
 	
 	
-
+	
+	
 }

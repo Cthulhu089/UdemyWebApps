@@ -5,24 +5,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="STUDENT")
-public class Student {
+@Table(name = "Person")
+/*Named Query*/
+@NamedQueries({@NamedQuery(name = "person.getAll", query = "SELECT person FROM Person person"),
+			   @NamedQuery(name = "person.getById", query = "SELECT person FROM Person p WHERE p.id =:id"),
+	           @NamedQuery(name = "person.getByName", query = "SELECT person FROM Person p WHERE p.name =:name")})
+
+public class Person {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
-	@Column(name = "name")
 	private String name;
-	
-	@Column(name = "age")
 	private int age;
 
-	public Student() {
-		
+	public Person() {
+
+	}
+
+	public Person(String name, int age) {
+		super();
+		this.name = name;
+		this.age = age;
 	}
 
 	public int getId() {
@@ -48,7 +57,8 @@ public class Student {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
-	
 
+	public String toString() {
+		return this.name + " - " + this.age;
+	}
 }
