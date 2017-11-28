@@ -8,9 +8,9 @@ import java.sql.Statement;
 
 public class StudentJDBCQuery {
    private String JDBC_Driver = "com.mysql.cj.jdbc.Driver";
-   private String DATABASE_URL = "jdbc:mysql://localhost/udemy?serverTimezone=UTC";
+   private String DATABASE_URL = "jdbc:mysql://localhost/School?serverTimezone=UTC";
    private String USER = "root";
-   private String PASSWORD = "Marco089";
+   private String PASSWORD = "marco089";
    
    public void readDataBase() {
 	   Connection connection = null;
@@ -22,7 +22,7 @@ public class StudentJDBCQuery {
 		   connection = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
 		   statement = connection.createStatement();
 		   
-		   String sqlCommand = "Select * from students";
+		   String sqlCommand = "Select * from student";
 		   resultSet = statement.executeQuery(sqlCommand);
 		   
 		   while (resultSet.next()) {
